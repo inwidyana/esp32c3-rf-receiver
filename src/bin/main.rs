@@ -60,6 +60,8 @@ fn main() -> ! {
     let delay = Delay::new();
     let mut data: [PulseCode; 48] = [PulseCode::default(); 48];
 
+    println!("Printing all rf signal recived...");
+
     loop {
         for x in data.iter_mut() {
             x.reset()
