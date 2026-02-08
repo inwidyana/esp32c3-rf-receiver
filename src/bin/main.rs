@@ -9,20 +9,16 @@
 
 use esp_hal::main;
 use esp_hal::gpio::{
-    // Output,
+    Output,
     Level,
-    // OutputConfig
+    OutputConfig
 };
 use esp_hal::time::Rate;
 use esp_hal::rmt::{
     PulseCode, 
     Rmt, 
-    RxChannelConfig, 
-    // TxChannelCreator, 
+    RxChannelConfig,
     RxChannelCreator
-    // Error, 
-    // Channel, 
-    // Rx
 };
 use esp_hal::delay::Delay;
 use esp_println::{print, println};
@@ -46,6 +42,10 @@ fn main() -> ! {
 
     let config = esp_hal::Config::default();
     let peripherals = esp_hal::init(config);
+
+    // Start up the receiver
+    let mut receiver_cs = Output::new(peripherals.GPIO3, Level::High, OutputConfig::default()); // Start High to enable receiver
+    receiver_cs.set_high();
 
     const WIDTH: usize = 80;
 
